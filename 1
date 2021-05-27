@@ -1,0 +1,49 @@
+input_line = input().rstrip().split(' ')
+N = int(input_line[0])
+rule = int(input_line[1])
+
+ticket_prices = []
+for i in range(N):
+    price = int(input().rstrip())
+    ticket_prices.append(price)
+  
+
+import itertools
+all_conb = []
+for n in range(1,len(ticket_prices)+1):
+    for conb in itertools.combinations(ticket_prices, n):
+        all_conb.append(list(conb))
+        
+for g in range(len(all_conb)):
+    k = len(all_conb) - 1 - g
+    a = all_conb[k]
+    tot_price = sum(a)
+        
+    if tot_price <= rule:
+        length = len(a)
+        break
+        
+conditioned_comb = []
+change = []
+for j in range(len(all_conb)):
+    if len(all_conb[j]) == length:
+        conditioned_comb.append(all_conb[j])
+     
+for h in range(len(conditioned_comb)):
+    b = sum(conditioned_comb[h])
+    
+    if b <= rule:
+        change.append(rule - b)
+  
+     
+print(min(change))
+
+--------------------------------------------------------------
+input example
+3 500
+90
+130
+240
+
+    
+    
